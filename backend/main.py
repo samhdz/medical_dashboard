@@ -11,6 +11,7 @@ from schemas import StudyCreate, StudyUpdate, StudyResponse
 
 app = FastAPI()
 
+# TODO no permitir cualquier origen!
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
