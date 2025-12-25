@@ -19,10 +19,10 @@ Mini dashboard para gestionar estudios médicos con métricas en tiempo real y s
 -  Crear nuevos estudios médicos
 -  Mostrar dashboard de métricas (Total, Pendientes, Completados)
 -  Actualización automática de datos después de operaciones
--  **Búsqueda de pacientes** - Filtrado en tiempo real por nombre de paciente
 
 ### Características extra
 - Endpoint PATCH para marcar estudios como completados
+- Filtrado de listado de estudios por nombre de paciente
 - Indicador "Balance del día" para mostrar progreso neto diario en la carga de trabajo (creados vs completados)
 
 ### Puntos de mejora a futuro (no implementados)
