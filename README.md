@@ -18,6 +18,15 @@ Mini dashboard para gestionar estudios médicos con métricas en tiempo real y s
 ### Características extra
 - Endpoint PATCH para marcar estudios como completados
 - Indicador "Balance del día" para mostrar progreso neto diario en la carga de trabajo (creados vs completados)
+
+### Puntos de mejora a futuro (no implementados)
+#### Funcionales:
+- Agregar más datos al dashboard (estudios completados y pendientes por tipo). Esto agrega valor permitiendo que el usuario analista pueda decidir si incorporar más recursos en algún área del laboratorio.
+- Separar el dashboard del registro y ejecución de estudios. Se interpreta que en general estas tareas las harán personas distintas.
+- Agregar estados adicionales, el modelo actual asume que todo estudio pendiente se completa eventualmente, cuando es posible que un estudio se cancele o no pueda ejecutarse.
+### Técnicos: 
+- Normalizar la estructura de tablas (mover el tipo de estudio a una tabla de catálogo)
+- Centralizar configuración de puertos y acceso a base de datos en un único archivo.
 ## Instalación y ejecución
 
 ### Prerequisitos
@@ -75,32 +84,31 @@ chmod +x start-frontend.sh
 ./start-frontend.sh
 ```
 
-### Configuración manual
+Si se desea revisar el despliegue a nivel más granular, ver sección Despliegue manual.
 
-**Backend**
-```bash
-cd backend
-python -m venv venv
+## Decisiones funcionales y técnicas
+- Me incliné por el uso de SQLite para tener cierta persistencia sin el costo de configuración y despliegue de un servidor de bases de datos. En un entorno productivo optaría por una solución más robusta y escalable como PostgreSQL (asumiendo que el costo de desplegar esta herramienta se pueda justificar).
+- Decidí generar scripts de despliegue para facilitar la revisión del proyecto (por favor alertarme si hay algún problema para desplegar el proyecto!).
+- Agregué el endpoint PATCH para "cerrar el flujo de trabajo", entendiendo que en general quien va a registrar un estudio lo registrará como "Pendiente" y no como "Completado". El pasaje de estado a "Completado" lo hará el ejecutor del estudio una vez finalizada la intervención. 
 
-# Windows
-venv\Scripts\activate
+## Estructura del Proyecto
 
-# Linux/Mac
-source venv/bin/activate
-
-pip install -r requirements.txt
-cp .env.example .env
-uvicorn main:app --reload
 ```
-El backend se ejecuta en: http://localhost:8000
-
-**Frontend**
-```bash
-cd frontend
-npm install
-npm run dev
+medical-studies-dashboard/
+├── backend/
+│   ├── main.py           # API endpoints
+│   ├── models.py         # Modelos SQLAlchemy
+│   ├── schemas.py        # Schemas Pydantic
+│   ├── database.py       # Configuración de BD
+│   └── requirements.txt  # Dependencias Python
+├── frontend/
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── components/   # Componentes React
+│   │   └── services/     # API client
+│   └── package.json      # Dependencias Node
+└── README.md
 ```
-El frontend se ejecuta en: http://localhost:5173
 
 ## Endpoints de la API
 
@@ -151,27 +159,30 @@ Marca un estudio como completado.
 
 **Respuesta:** `200 OK` | `404 Not Found`
 
-## Tecnologías Utilizadas
 
-- **Backend**: FastAPI + SQLAlchemy + SQLite
-- **Frontend**: React 19 + Vite + Tailwind CSS
-- **Base de Datos**: SQLite (desarrollo)
+## Despliegue manual
 
-## Estructura del Proyecto
+**Backend**
+```bash
+cd backend
+python -m venv venv
 
+# Windows
+venv\Scripts\activate
+
+# Linux/Mac
+source venv/bin/activate
+
+pip install -r requirements.txt
+cp .env.example .env
+uvicorn main:app --reload
 ```
-medical-studies-dashboard/
-├── backend/
-│   ├── main.py           # API endpoints
-│   ├── models.py         # Modelos SQLAlchemy
-│   ├── schemas.py        # Schemas Pydantic
-│   ├── database.py       # Configuración de BD
-│   └── requirements.txt  # Dependencias Python
-├── frontend/
-│   ├── src/
-│   │   ├── App.jsx
-│   │   ├── components/   # Componentes React
-│   │   └── services/     # API client
-│   └── package.json      # Dependencias Node
-└── README.md
+El backend se ejecuta en: http://localhost:8000
+
+**Frontend**
+```bash
+cd frontend
+npm install
+npm run dev
 ```
+El frontend se ejecuta en: http://localhost:5173
