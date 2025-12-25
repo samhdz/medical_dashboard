@@ -44,6 +44,8 @@ Mini dashboard para gestionar estudios médicos con métricas en tiempo real y s
 
 **Script de despliegue (centralizado)**
 
+En todos los casos, ejecutar comandos desde el directorio base del proyecto.
+
 **Para Windows:**
 ```bash
 ./deploy.bat
