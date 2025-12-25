@@ -6,6 +6,12 @@ Mini dashboard para gestionar estudios médicos con métricas en tiempo real y s
 - Backend: FastAPI + SQLAlchemy + SQLite
 - Frontend: React + Vite + Tailwind CSS
 
+## Navegación Rápida
+
+- [Características](#características)
+- [Instalación y Ejecución](#instalación-y-ejecución)
+- [Decisiones Funcionales y Técnicas](#decisiones-funcionales-y-técnicas)
+
 ## Características
 
 ### Requisitos
