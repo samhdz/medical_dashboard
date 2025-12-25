@@ -51,6 +51,7 @@ function StudiesList({ studies, loading, error, onStudyUpdated }) {
         />
         <p className="text-sm text-gray-500 mt-2">
           Mostrando {filteredStudies.length} de {studies.length} estudios
+
         </p>
       </div>
 
@@ -123,6 +124,9 @@ function StudiesList({ studies, loading, error, onStudyUpdated }) {
           </table>
         </div>
       )}
+      <p className="text-sm text-gray-400 mt-3">
+        Se muestran solo los estudios pendientes y los completados en la jornada de hoy.
+      </p>
     </div>
   );
 }
