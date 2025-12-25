@@ -9,25 +9,25 @@ Mini dashboard para gestionar estudios médicos con métricas en tiempo real y s
 ## Características
 
 ### Requisitos
-- ✅ Listar todos los estudios médicos con información del paciente
-- ✅ Crear nuevos estudios médicos
-- ✅ Mostrar dashboard de métricas (Total, Pendientes, Completados)
-- ✅ Actualización automática de datos después de operaciones
-- ✅ **Búsqueda de pacientes** - Filtrado en tiempo real por nombre de paciente
+-  Listar todos los estudios médicos con información del paciente
+-  Crear nuevos estudios médicos
+-  Mostrar dashboard de métricas (Total, Pendientes, Completados)
+-  Actualización automática de datos después de operaciones
+-  **Búsqueda de pacientes** - Filtrado en tiempo real por nombre de paciente
 
 ### Características extra
 - Endpoint PATCH para marcar estudios como completados
 - Indicador "Balance del día" para mostrar progreso neto diario en la carga de trabajo (creados vs completados)
-## Instalación y Ejecución
+## Instalación y ejecución
 
 ### Prerequisitos
 - Python 3.9+
 - Node.js 16+
-- npm o yarn
+- npm
 
-### Inicio Rápido (Recomendado)
+### Quickstart
 
-**Opción 1: Script de Despliegue Automatizado**
+**Script de despliegue (centralizado)**
 
 **Para Windows:**
 ```bash
@@ -41,13 +41,19 @@ chmod +x deploy.sh
 ```
 
 Este script:
-- ✅ Verifica la instalación de Python y Node.js
-- ✅ Crea el entorno virtual para el backend
-- ✅ Instala todas las dependencias (backend y frontend)
-- ✅ Crea el archivo .env desde la plantilla
-- ✅ Inicia ambos servidores (backend y frontend)
+-  Verifica la instalación de Python y Node.js
+-  Crea el entorno virtual para el backend
+-  Instala todas las dependencias (backend y frontend)
+-  Crea el archivo .env desde la plantilla
+-  Inicia ambos servidores (backend y frontend)
 
-**Opción 2: Scripts Individuales**
+### Acceder a la aplicación
+- **Frontend:** http://localhost:5173
+- **Backend API:** http://localhost:8000
+- **Documentación API (generada automáticamente):** http://localhost:8000/docs
+
+
+**Scripts auxiliares**
 
 Iniciar solo el backend:
 ```bash
@@ -69,9 +75,9 @@ chmod +x start-frontend.sh
 ./start-frontend.sh
 ```
 
-### Configuración Manual
+### Configuración manual
 
-**Configuración del Backend**
+**Backend**
 ```bash
 cd backend
 python -m venv venv
@@ -88,18 +94,13 @@ uvicorn main:app --reload
 ```
 El backend se ejecuta en: http://localhost:8000
 
-**Configuración del Frontend**
+**Frontend**
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 El frontend se ejecuta en: http://localhost:5173
-
-### Acceder a la Aplicación
-- **Frontend:** http://localhost:5173
-- **Backend API:** http://localhost:8000
-- **Documentación API:** http://localhost:8000/docs
 
 ## Endpoints de la API
 
@@ -153,7 +154,7 @@ Marca un estudio como completado.
 ## Tecnologías Utilizadas
 
 - **Backend**: FastAPI + SQLAlchemy + SQLite
-- **Frontend**: React 18 + Vite + Tailwind CSS
+- **Frontend**: React 19 + Vite + Tailwind CSS
 - **Base de Datos**: SQLite (desarrollo)
 
 ## Estructura del Proyecto
