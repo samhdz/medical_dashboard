@@ -35,11 +35,19 @@ function MetricsDashboard({ studies }) {
 
   const getBalanceIndicator = () => {
     const diff = metrics.createdToday - metrics.completedToday;
-    if (diff > 0) {
+    // Se utiliza una escala de colores básica para representar el atraso entre estudios completados vs. creados hoy.
+    if (diff > (metrics.createdToday / 2)){
       return {
-        text: `+${diff} estudios acumulados`,
+        text: `+${diff} estudios acumulados hoy`,
         color: 'text-red-600',
         emoji: '🔴'
+      };
+    }
+    if (diff > 0) {
+      return {
+        text: `${diff} estudios acumulados hoy`,
+        color: 'text-orange-600',
+        emoji: '🟠'
       };
     } else if (diff < 0) {
       return {
