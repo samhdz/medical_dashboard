@@ -1,5 +1,6 @@
-fastapi==0.104.1
-sqlalchemy==2.0.23
-pydantic==2.5.0
-uvicorn==0.24.0
-python-dotenv==1.0.0
+# Core dependencies with Python 3.13 compatibility
+fastapi>=0.104.0,<1.0.0
+sqlalchemy>=2.0.20,<3.0.0
+uvicorn>=0.24.0,<1.0.0
+python-dotenv>=1.0.0,<2.0.0
+pydantic>=2.7.0,<3.0.0
